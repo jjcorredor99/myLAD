@@ -5,11 +5,26 @@ import pandas as pd
 import dateutil.parser as dparser
 import re
 
+def extract_nodes():
+	df = pd.read_csv("datasets\ed2derecha.csv")
+
+	source = df["sourcecol"]
+	source = set(source.drop_duplicates().tolist())
+
+	target = df["targetcol"]
+	target = set(target.drop_duplicates().tolist())
+
+	nodes = list(source.union(target))
+
+	return nodes
+
+
 '''
 treat each day as a discrete time stamp
 '''
-fname="red_temporal_completa.csv"
+fname="datasets\ed2derecha.csv"
 def load_temporarl_edgelist(fname, max_nodes=-1):
+	all_nodes = extract_nodes()
 	lines=pd.read_csv(fname)
 	lines=lines[['sourcecol', 'targetcol', 'day', "weight"]]
 	#lines=lines.sort_values("datetime")
@@ -47,43 +62,6 @@ def load_temporarl_edgelist(fname, max_nodes=-1):
 		G.add_edge(source, target, weight=w)
 		 
 	G_times.append(G)
+	G_times = G_times[1:]
 	print ("maximum time stamp is " + str(len(G_times)))
 	return G_times
-
-# def plot_nodes_edges(G_times, fname):
-# 	max_time = len(G_times)
-# 	t = list(range(0, max_time))
-# 	print(t)
-# 	num_nodes = []
-# 	num_edges = []
-# 	for G in G_times:
-# 		num_nodes.append(G.number_of_nodes())
-# 		num_edges.append(G.number_of_edges())
-# 	print(t, num_edges)
-
-# 	plt.rcParams.update({'figure.autolayout': True})
-# 	plt.rc('xtick', labelsize='x-small')
-# 	plt.rc('ytick', labelsize='x-small')
-# 	fig = plt.figure(figsize=(4, 2))
-# 	ax = fig.add_subplot(1, 1, 1)
-# 	ax.plot(t, num_nodes, marker='o', color='#74a9cf', ls='solid', linewidth=0.5, markersize=1, label="nodes")
-# 	ax.plot(t, num_edges, marker='o', color='#78f542', ls='solid', linewidth=0.5, markersize=1, label="edges")
-# 	ax.set_xlabel('time stamp', fontsize=8)
-# 	ax.set_xscale('log')
-# 	ax.set_ylabel('number of nodes / edges', fontsize=8)
-# 	plt.title("plotting number of nodes and edges in " + fname, fontsize='x-small')
-# 	plt.legend(fontsize = 'x-small')
-# 	plt.savefig("number of nodes and edges"+'.pdf',bbox_inches='tight', pad_inches=0)
-
-
-
-# def main():
-# 	fname = "red_temporal_completa.csv"
-# 	G_times = load_temporarl_edgelist(fname)
-# 	max_time = len(G_times)
-# 	plot_nodes_edges(G_times, fname)
-
-
-
-# if __name__ == "__main__":
-#     main()

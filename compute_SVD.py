@@ -315,13 +315,13 @@ def compute_UCI_SVD(num_eigen=6, top=True):
     (Temporal_eigenvalues, activity_vecs) = SVD_perSlice(G_times, directed=directed, num_eigen=num_eigen, top=top, max_size=max_nodes)
     normal_util.save_object(Temporal_eigenvalues, "UCI_L_singular.pkl")
 
-def compute_derecha_SVD(num_eigen=6, top=True): # NUMBER OF EIGEN??
-    fname = "datasets/red2derecha.csv"
+def compute_derecha_SVD(num_eigen=3500, top=True): # NUMBER OF EIGEN??
+    fname = "datasets/ed2derecha.csv"
     max_nodes = 5699
     directed = True
     G_times = derecha_loader.load_temporarl_edgelist(fname, max_nodes=max_nodes)
     (Temporal_eigenvalues, activity_vecs) = SVD_perSlice(G_times, directed=directed, num_eigen=num_eigen, top=top, max_size=max_nodes)
-    normal_util.save_object(Temporal_eigenvalues, "derecha_singular.pkl")
+    normal_util.save_object(Temporal_eigenvalues, "derecha_singular_3500_1_a_5.pkl")
     
 
 

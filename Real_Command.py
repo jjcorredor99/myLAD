@@ -18,6 +18,7 @@ def run_LAD_real(dataset, num_eigen, top):
     if (dataset == "canVote"):
         compute_SVD.compute_canVote_SVD(num_eigen=num_eigen, top=top)
         Anomaly_Detection.canVote()
+        
     if (dataset == "derecha"):
         compute_SVD.compute_derecha_SVD(num_eigen=num_eigen, top=top)
         Anomaly_Detection.Derecha()
@@ -37,3 +38,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
