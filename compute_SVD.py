@@ -315,6 +315,8 @@ def compute_UCI_SVD(num_eigen=6, top=True):
     (Temporal_eigenvalues, activity_vecs) = SVD_perSlice(G_times, directed=directed, num_eigen=num_eigen, top=top, max_size=max_nodes)
     normal_util.save_object(Temporal_eigenvalues, "UCI_L_singular.pkl")
 
+
+#Aca guardamos los eigenvalues de los grafos temporales 
 def compute_derecha_SVD(num_eigen=50, top=True): # NUMBER OF EIGEN??
     fname = "datasets/ed2derecha.csv"
     max_nodes = 5699
