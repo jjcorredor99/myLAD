@@ -605,8 +605,6 @@ def detection_with_bothwindows(eigen_file = "UCI_eigs_slices.pkl", timestamps=19
 
     spectrums = spectrums.real
     spectrums = spectrums.reshape((timestamps,-1))
-
-
     spectrums= normalize(spectrums, norm='l2')
 
     print ("short window is " + str(window1))
@@ -671,13 +669,13 @@ def USLegis():
 def Derecha():
 
     timestamps = 62
-    percent_ranked = 0.15
+    percent_ranked = 0.10
     eigen_file = "derecha_singular.pkl"
     fname = "derecha_plot"
     difference=True
     #real_events = [3,7]
 
-    window1 = 2
+    window1 = 5
     window2 = 10
     initial_window = 10
     (z_shorts,z_longs,z_scores, events) = detection_with_bothwindows(eigen_file=eigen_file, timestamps=timestamps, 
